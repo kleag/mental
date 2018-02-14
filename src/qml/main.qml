@@ -96,6 +96,82 @@ Window
                   })
                 }
             }
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width; 
+//                 anchors.verticalCenter: parent.verticalCenter
+
+                spacing: 5
+
+                Button { 
+                  text: "0"
+                  onClicked: {
+                    input.text = input.text + "0"
+                  }
+                }
+                Button { 
+                  text: "1"
+                  onClicked: {
+                    input.text = input.text + "1"
+                  }
+                }
+                Button { 
+                  text: "2"
+                  onClicked: {
+                    input.text = input.text + "2"
+                  }
+                }
+                Button { 
+                  text: "3"
+                  onClicked: {
+                    input.text = input.text + "3"
+                  }
+                }
+                Button { 
+                  text: "4"
+                  onClicked: {
+                    input.text = input.text + "4"
+                  }
+                }
+                Button { 
+                  text: "5"
+                  onClicked: {
+                    input.text = input.text + "5"
+                  }
+                }
+                Button { 
+                  text: "6"
+                  onClicked: {
+                    input.text = input.text + "6"
+                  }
+                }
+                Button { 
+                  text: "7"
+                  onClicked: {
+                    input.text = input.text + "7"
+                  }
+                }
+                Button { 
+                  text: "8"
+                  onClicked: {
+                    input.text = input.text + "8"
+                  }
+                }
+                Button { 
+                  text: "9"
+                  onClicked: {
+                    input.text = input.text + "9"
+                  }
+                }
+            }
+            Button { 
+              text: "Validate"
+              anchors.horizontalCenter: parent.horizontalCenter
+              width: parent.width
+              onClicked: {
+                input.accepted()
+              }
+            }
         }
     }
 }
