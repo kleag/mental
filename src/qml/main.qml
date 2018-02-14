@@ -18,25 +18,26 @@ Window
         timer.start();
     }
     visible: true
-    width: 300
-    height: 240
+    width: 320
+    height: 450
 
     Rectangle {
+      id: rec
+                anchors.horizontalCenter: parent.horizontalCenter
         anchors.fill: parent
         color: "steelblue"
         Column {
             anchors.fill: parent
-
+            padding: 1.0
             spacing: 5
             Row {
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width; 
-//                 anchors.verticalCenter: parent.verticalCenter
-
+                width: rec.width - 10; 
+                anchors.margins: 5
                 spacing: 5
 
                 Rectangle { 
-                  width: (parent.width-60)/2; height: 100; radius: 20.0
+                  width: (rec.width/2)-35; height: 50; radius: 20.0
                             color: "#42a51c" 
                   Label {
                       id: a
@@ -46,7 +47,7 @@ Window
 
                 }
                 Rectangle { 
-                  width: 50; height: 100
+                  width: 50 ; height: 50
                   color: "steelblue"
                   Label {
                       anchors.centerIn: parent
@@ -55,7 +56,7 @@ Window
 
                 }
                 Rectangle {
-                  width: (parent.width-60)/2; height: 100; radius: 20.0
+                  width: (rec.width/2)-35; height: 50; radius: 20.0
                             color: "#42a51c" 
                   Label {
                       id: b
@@ -67,8 +68,9 @@ Window
             TextField {
                 id: input
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width; height: 100
+                width: rec.width - 10; height: 100
                 placeholderText: qsTr("Enter sum")
+                horizontalAlignment: TextInput.AlignHCenter
                 background: Rectangle {
                   id: fieldBackground
                   color: "white"
@@ -96,78 +98,96 @@ Window
                   })
                 }
             }
-            Row {
+            Grid {
+                columns: 3
+                spacing: 4
+                
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width; 
-//                 anchors.verticalCenter: parent.verticalCenter
+                width: rec.width - 10; 
 
-                spacing: 5
-
-                Button { 
-                  text: "0"
-                  onClicked: {
-                    input.text = input.text + "0"
-                  }
-                }
                 Button { 
                   text: "1"
+                  width: parent.width/3 - 3; 
                   onClicked: {
                     input.text = input.text + "1"
                   }
                 }
                 Button { 
                   text: "2"
+                  width: parent.width/3 - 3; 
                   onClicked: {
                     input.text = input.text + "2"
                   }
                 }
                 Button { 
                   text: "3"
+                  width: parent.width/3 - 3; 
                   onClicked: {
                     input.text = input.text + "3"
                   }
                 }
                 Button { 
                   text: "4"
+                  width: parent.width/3 - 3; 
                   onClicked: {
                     input.text = input.text + "4"
                   }
                 }
                 Button { 
                   text: "5"
+                  width: parent.width/3 - 3; 
                   onClicked: {
                     input.text = input.text + "5"
                   }
                 }
                 Button { 
                   text: "6"
+                  width: parent.width/3 - 3; 
                   onClicked: {
                     input.text = input.text + "6"
                   }
                 }
                 Button { 
                   text: "7"
+                  width: parent.width/3 - 3; 
                   onClicked: {
                     input.text = input.text + "7"
                   }
                 }
                 Button { 
                   text: "8"
+                  width: parent.width/3 - 3; 
                   onClicked: {
                     input.text = input.text + "8"
                   }
                 }
                 Button { 
                   text: "9"
+                  width: parent.width/3 - 3; 
                   onClicked: {
                     input.text = input.text + "9"
                   }
+                }
+                Button { 
+                  text: ""
+                  width: parent.width/3 - 3; 
+                }
+                Button { 
+                  text: "0"
+                  width: parent.width/3 - 3; 
+                  onClicked: {
+                    input.text = input.text + "0"
+                  }
+                }
+                Button { 
+                  text: ""
+                  width: parent.width/3 - 3; 
                 }
             }
             Button { 
               text: "Validate"
               anchors.horizontalCenter: parent.horizontalCenter
-              width: parent.width
+              width: rec.width - 10
               onClicked: {
                 input.accepted()
               }
