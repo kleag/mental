@@ -5,8 +5,15 @@ import QtQuick.Controls 2.1
 Window
 {
     id: window
-    function randomNumber() {
+    function randomNumber(old) {
+      if (old === undefined) {
         return Math.floor(Math.random() * 10) + 1;
+      }
+      var random = Math.floor(Math.random() * 10) + 1;
+      while (random == old) {
+        random = Math.floor(Math.random() * 10) + 1;
+      }
+      return random
     }
     Timer {
         id: timer
@@ -61,42 +68,60 @@ Window
                   Label {
                       id: b
                       anchors.centerIn: parent
-                      text: window.randomNumber()
+                      text: a.text
                   }
                 }
             }
-            TextField {
-                id: input
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: rec.width - 10; height: 100
-                placeholderText: qsTr("Enter sum")
-                horizontalAlignment: TextInput.AlignHCenter
-                background: Rectangle {
-                  id: fieldBackground
-                  color: "white"
-                  radius: 2
-                  implicitWidth: 100
-                  implicitHeight: 24
-                  border.color: "#333"
-                  border.width: 1
-                }
+            Row {
+              height: 100
+              anchors.horizontalCenter: parent.horizontalCenter
+              spacing: 4
+              TextField {
+                  id: input
+                  anchors.verticalCenter: parent.verticalCenter
+//                   anchors.horizontalCenter: parent.horizontalCenter
+                  width: rec.width - 35; height: 100
+                  placeholderText: qsTr("Enter sum")
+                  horizontalAlignment: TextInput.AlignHCenter
+                  background: Rectangle {
+                    id: fieldBackground
+                    color: "white"
+                    radius: 2
+                    implicitWidth: 100
+                    implicitHeight: 24
+                    border.color: "#333"
+                    border.width: 1
+                  }
 
-                onAccepted: {
-                  if (parseInt(input.text) == parseInt(a.text) + parseInt(b.text)) {
-                    input.text = qsTr("Win!")
-                    fieldBackground.color = "green"
+                  onAccepted: {
+                    var won = (parseInt(input.text) == parseInt(a.text) + parseInt(b.text))
+                    if (won) {
+                      input.text = qsTr("Win!")
+                      fieldBackground.color = "green"
+                    }
+                    else {
+                      input.text = qsTr("Lost!")
+                      fieldBackground.color = "red"
+                    }
+                    window.delay(1000, function() {
+                      if (won) {
+                        a.text = window.randomNumber(a.text)
+  //                     b.text = window.randomNumber()
+                      }
+                      input.text = ""
+                      fieldBackground.color = "white"
+                    })
                   }
-                  else {
-                    input.text = qsTr("Lost!")
-                    fieldBackground.color = "red"
-                  }
-                  window.delay(1000, function() {
-                    a.text = window.randomNumber()
-                    b.text = window.randomNumber()
-                    input.text = ""
-                    fieldBackground.color = "white"
-                  })
+              }
+              Button { 
+                text: "<"
+                anchors.verticalCenter: parent.verticalCenter
+                width: 20
+                height: 98
+                onClicked: {
+                  input.text = input.text.substring(0, input.text.length-1)
                 }
+              }
             }
             Grid {
                 columns: 3
@@ -176,7 +201,9 @@ Window
                   text: "0"
                   width: parent.width/3 - 3; 
                   onClicked: {
-                    input.text = input.text + "0"
+                    if (input.text.length != 0) {
+                      input.text = input.text + "0"
+                    }
                   }
                 }
                 Button { 
